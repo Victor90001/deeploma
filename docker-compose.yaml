@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  fastapi:
+    build: .
+    image: vurc/signdetect
+    container_name: signs
+    restart: unless-stopped
+    ports:
+      - 8000:8000
