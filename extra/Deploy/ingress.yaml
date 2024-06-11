@@ -1,0 +1,56 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alb-tls
+  annotations:
+    ingress.alb.yc.io/subnets: <список_идентификаторов_подсетей>
+    ingress.alb.yc.io/security-groups: <список_идентификаторов_групп_безопасности>
+    ingress.alb.yc.io/external-ipv4-address: <способ_назначения_IP-адреса>
+    ingress.alb.yc.io/group-name: <имя_Ingress-группы>
+spec:
+  tls:
+    - hosts:
+        - <доменное_имя>
+      secretName: yc-certmgr-cert-id-<идентификатор_TLS-сертификата>
+  rules:
+    - host: <доменное_имя>
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: web
+                port:
+                  name: http
+    - host: <>
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/detect"
+            backend:
+              service:
+                name: api
+                port:
+                  name: http
+---
+apiVersion: v1
+  kind: Service
+  metadata:
+    name: web
+  spec:
+    selector:
+      app: myapp
+    type: NodePort
+    ports:
+      - name: http
+        port: 80
+        targetPort: 8000
+        protocol: TCP
+        nodePort: 30080
+      - name: httpapi
+        port: 80
+        targetPort: 8000
+        protocol: TCP
+        nodePort: 30081

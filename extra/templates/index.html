@@ -1,0 +1,116 @@
+
+{% extends "base_main.html" %}
+{% block link %}
+<script src="{{url_for('static', filename='index.js')}}"></script> 
+{% endblock %}
+{% block content %}
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+  <!-- Automatic Slideshow Images -->
+  <div class="mySlides w3-display-container w3-center">
+    <!-- <img src="{{url_for('static', filename='slide-images/')}}" style="width:50%"> -->
+  </div>
+  <div class="mySlides w3-display-container w3-center">
+    <!-- <img src="{{url_for('static', filename='slide-images/')}}" style="width:50%"> -->
+  </div>
+  <div class="mySlides w3-display-container w3-center">
+    <!-- <img src="{{url_for('static', filename='slide-images/')}}" style="width:50%"> -->
+  </div>
+
+  <!-- The Band Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="technologies">
+    <h2 class="w3-wide">О проекте</h2>
+    <p class="w3-justify">АФДАОФЫЛАФЛ</p><br>
+    <p>Использованные технологии</p><br>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-third">
+        <p>Python</p>
+        <img src="{{url_for('static', filename='technologies/python.png')}}" class="w3-round w3-margin-bottom" alt="Python logo" width="120" height="120">
+      </div>
+      <div class="w3-third">
+        <p>Docker</p>
+        <img src="{{url_for('static', filename='technologies/docker.png')}}" class="w3-round w3-margin-bottom" alt="Docker logo" width="120" height="120">
+      </div>
+      <div class="w3-third">
+        <p>Kubernetes</p>
+        <img src="{{url_for('static', filename='technologies/kubernetes.png')}}" class="w3-round" alt="Kubernetes logo" width="60%">
+      </div>
+    </div>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-third">
+        <p>YOLO</p>
+        <img src="{{url_for('static', filename='technologies/yolo.png')}}" class="w3-round w3-margin-bottom" alt="YOLO logo" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>Ultalytics</p>
+        <img src="{{url_for('static', filename='technologies/ultralytics.png')}}" class="w3-round w3-margin-bottom" alt="Ultralytics logo" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>Yandex Cloud</p>
+        <img src="{{url_for('static', filename='technologies/yacloud.png')}}" class="w3-round" alt="Yandex Cloud logo" style="width:60%">
+      </div>
+      </div>
+  </div>
+
+  <!-- The Tour Section -->
+  <!-- <div class="w3-black" id="tour">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+      <h2 class="w3-wide w3-center">Распознавание</h2>
+      <p class="w3-opacity w3-center"><i>Для распознавания загрузите файл нажмите отправить и ожидайте результата</i></p><br>
+      <form action="/detection" method="post">
+        <input class="w3-center" type="file" id="upload-file" name="image"><br>
+        <button class="w3-button w3-black w3-section w3-right" type="submit">Отправить</button>
+      </form>
+    </div>
+  </div> -->
+
+  <!-- Ticket Modal -->
+  <!-- <div id="ticketModal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+      <header class="w3-container w3-teal w3-center w3-padding-32"> 
+        <span onclick="document.getElementById('ticketModal').style.display='none'" 
+       class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
+        <h2 class="w3-wide"><i class="fa fa-suitcase w3-margin-right"></i>Tickets</h2>
+      </header>
+      <div class="w3-container">
+        <p><label><i class="fa fa-shopping-cart"></i> Tickets, $15 per person</label></p>
+        <input class="w3-input w3-border" type="text" placeholder="How many?">
+        <p><label><i class="fa fa-user"></i> Send To</label></p>
+        <input class="w3-input w3-border" type="text" placeholder="Enter email">
+        <button class="w3-button w3-block w3-teal w3-padding-16 w3-section w3-right">PAY <i class="fa fa-check"></i></button>
+        <button class="w3-button w3-red w3-section" onclick="document.getElementById('ticketModal').style.display='none'">Close <i class="fa fa-remove"></i></button>
+        <p class="w3-right">Need <a href="#" class="w3-text-blue">help?</a></p>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- The Contact Section -->
+  <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
+    <h2 class="w3-wide w3-center">Связаться со мной</h2>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-col m6 w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker" style="width:30px"></i> Краснодар, Россия<br>
+        <i class="fa fa-phone" style="width:30px"></i> Phone: +7 888 188 8888<br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+      </div>
+      <div class="w3-col m6">
+        <form action="/contactus" method="post">
+          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+            <div class="w3-half">
+              <input class="w3-input w3-border" type="text" placeholder="Имя" required name="name">
+            </div>
+            <div class="w3-half">
+              <input class="w3-input w3-border" type="text" placeholder="Почта" required name="email">
+            </div>
+          </div>
+          <input class="w3-input w3-border" type="text" placeholder="Сообщение" required name="message">
+          <button class="w3-button w3-black w3-section w3-right" type="submit">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+<!-- End Page Content -->
+</div>
+{% endblock %}

@@ -4,6 +4,10 @@ services:
     build: .
     image: vurc/signdetect
     container_name: signs
+    # network_mode: host
     restart: unless-stopped
+    environment:
+      - JWT_SECRET=5d609ed8d4efab2d4766df7fe0d039b2769d9065b64faca510615aa77aa9efbb
+      - POSTGRES_DATABASE_URL=postgresql://postgres:pass@:31893/diplom
     ports:
       - 8000:8000
