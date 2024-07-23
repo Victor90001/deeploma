@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      imagePullSecrets:
+        - name: k8s-registry-creds
+      containers:
+        - name: api
+          image: 212.233.122.47:5000/back:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: api-secrets
+                key: DB_USER
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: api-secrets
+                key: DB_PASSWORD
+          - name: POSTGRES_DATABASE_URL
+            value: postgresql://$(DB_USER):$(DB_PASSWORD)@rc1a-99l6aj8ka3ccdv88.mdb.yandexcloud.net:6432/diplom?sslmode=verify-full&target_session_attrs=read-write
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: api-secrets
+                key: JWT_SECRET
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-service
+  labels:
+    app: api
+spec:
+  # type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  selector:
+    app: api
