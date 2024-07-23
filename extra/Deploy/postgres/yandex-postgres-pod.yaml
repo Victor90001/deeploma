@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: 'docker.io/postgresql:15'
+          ports:
+            - containerPort: 5432
+          env:
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: POSTGRES_USER
+                optional: false
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: POSTGRES_PASSWORD
+                optional: false
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: POSTGRES_DB
+                optional: false
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data/pgdata
+              name: postgresdata
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-volume-claim
