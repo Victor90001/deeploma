@@ -14,7 +14,8 @@
 [Docker образ WebUI](https://github.com/Victor90001/deeploma-webui/blob/1e4e5dcd6f05c02a2d0973c461bd5aa57387e88e/webui/Dockerfile)
 
 # Kubernetes
-
+## Архитектура кластера
+![Cluster](https://github.com/Victor90001/deeploma/blob/4682531d43d4dc25ce338c55e504edf9e307f087/extra/static/technologies/first%20cluster.png) <br>
 Для развертывания использовалась облачная платформа VK Cloud<br>
 И их средство управления Kubernetes кластерами.<br>
 
